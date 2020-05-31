@@ -16,6 +16,7 @@ def index():
                 <p><input type="submit" name="operator" value="Add" />
                 <input type="submit" name="operator" value="Sub" />
                 <input type="submit" name="operator" value="Mul" />
+                <input type="submit" name="operator" value="Div" />
             </form>
         '''
     elif request.method == 'POST':
@@ -33,28 +34,39 @@ def index():
             A = request.form.get('A')
             B = request.form.get('B')
             return redirect(url_for('mul', A=A, B=B)) 
+        if a == 'Div':
+            A = request.form.get('A')
+            B = request.form.get('B')
+            return redirect(url_for('div', A=A, B=B))
 
 
- @app.route('/add')
+@app.route('/add')
 def add():
     dict = request.args.to_dict()
     A = eval(dict['A'])
     B = eval(dict['B'])
     result = A+B
     return 'result: %s' % result
-    @app.route('/sub')
+@app.route('/sub')
 def sub():
     dict = request.args.to_dict()
     A = eval(dict['A'])
     B = eval(dict['B'])
     result = A-B
     return 'result: %s' % result
-    @app.route('/mul')
+@app.route('/mul')
 def mul():
     dict = request.args.to_dict()
     A = eval(dict['A'])
     B = eval(dict['B'])
     result = A*B
+    return 'result: %s' % result
+@app.route('/div')
+def div():
+    dict = request.args.to_dict()
+    A = eval(dict['A'])
+    B = eval(dict['B'])
+    result = A/B
     return 'result: %s' % result
 
 
